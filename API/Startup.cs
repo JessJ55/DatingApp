@@ -36,6 +36,7 @@ namespace API
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -44,7 +45,7 @@ namespace API
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        {//super imp ordenar aqui todos los metodos
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -55,6 +56,12 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            /*en cors es para resolver el error que nos da por NO permitir los navegadores
+            diferentes origenes de rutas por esto debemos usar withorigins con la ruta 
+            del front-end*/
+            app.UseCors(x=> x.AllowAnyHeader().AllowAnyMethod().WithOrigins
+            ("https://localhost:4200"));//debe revisar el orden y al activar certificado
+            //y ser valido la path es https no http
 
             app.UseAuthorization();
 
