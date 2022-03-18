@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UrlSerializer } from '@angular/router';
+import { Router, UrlSerializer } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
@@ -13,7 +14,8 @@ export class NavComponent implements OnInit {
   model:any ={}
   //currentUser$: Observable<User>;
 // loggedIn: boolean;
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService,private router:Router
+    ,private toastr: ToastrService) { }
 
   ngOnInit(): void {
 //this.getCurrentUser();
@@ -25,10 +27,15 @@ export class NavComponent implements OnInit {
     //esto de arriba es la function login y lo de abajo es la 
     //subscricion al servcio observable pues si no subcribe no ejecuta
    this.accountService.login(this.model).subscribe(response => {
+      this.router.navigateByUrl('/members');
      console.log(response);
      //this.loggedIn=true;
      
-   }, error => {console.log(error)})
+   }, error => {
+     console.log(error);
+    this.toastr.error(error.error);
+  })
+  
   }
 /*Lo que podriamos hacer es  RxJS extensiones
 reactivas para JS que funcionan con observables ej:
@@ -45,6 +52,7 @@ getMembers() {
 
   logout(){
     this.accountService.logout();
+    this.router.navigateByUrl('/');
     //this.loggedIn=false;
   }
 
