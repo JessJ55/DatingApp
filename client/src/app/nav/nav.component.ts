@@ -28,13 +28,15 @@ export class NavComponent implements OnInit {
     //subscricion al servcio observable pues si no subcribe no ejecuta
    this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/members');
-     console.log(response);
+     //console.log(response);
      //this.loggedIn=true;
      
-   }, error => {
-     console.log(error);
-    this.toastr.error(error.error);
-  })
+   }
+  //  , error => {
+  //    console.log(error);
+  //   this.toastr.error(error.error);
+  // }
+  )
   
   }
 /*Lo que podriamos hacer es  RxJS extensiones
