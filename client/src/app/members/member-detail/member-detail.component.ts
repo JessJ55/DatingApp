@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
-import { MembersService } from 'src/app/members.service';
+import { MembersService } from 'src/app/_services/members.service';
 import { Member } from 'src/app/_models/member';
 
 @Component({
@@ -53,4 +53,5 @@ export class MemberDetailComponent implements OnInit {
       //de prop photo undefined pues no se puede crear el member y despues la imagen
     })
   }
+  
 }

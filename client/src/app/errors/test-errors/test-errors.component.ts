@@ -13,10 +13,12 @@ export class TestErrorsComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
+    
   }
 
   /*Pueden que me muestren errores distintos ya que yo les tengo los errores sin 
-  clausula de authorize para que el postman me coja bien las pruebas */
+  clausula de authorize para que el postman me coja bien las pruebas  solucionado
+  solo me falta que el erro 500 muestre la pila y el nombre del error*/
 get404Error(){
   this.http.get(this.baseUrl + 'buggy/not-found').subscribe(response =>{
     console.log(response);
