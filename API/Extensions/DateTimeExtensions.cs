@@ -12,8 +12,10 @@ namespace API.Extensions
             var today=DateTime.Today;
             var age= today.Year-dob.Year;
             if (dob.Date > today.AddYears(-age)) 
+            // if(dob.AddYears(age) > today)
             age--;
-            return age;
+            return age;//la edad de todos sale igual porque 
+            //a la hora de crear las dateofBirth todos tiene la misma
                 
             
         }

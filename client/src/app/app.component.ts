@@ -10,19 +10,19 @@ import { AccountService } from './_services/account.service';
 })
 export class AppComponent implements OnInit{//el Oninit produce despues de ctor
   title = 'The Dating app';
-  users: any
+  //users: any
 
-  constructor(private accountService: AccountService){}//iniciar el http en el ctor es pronto
+  constructor(private http: HttpClient,private accountService: AccountService){}//iniciar el http en el ctor es pronto
 //en el ctor habia private http: HttpClient
   ngOnInit() 
   {
-    //this.getUsers();
+    // this.getUsers();
     this.setCurrentUser();
   }
 
 setCurrentUser()
 {
-const user: User=JSON.parse(localStorage.getItem('user'));
+const user: User = JSON.parse(localStorage.getItem('user'));
 this.accountService.setCurrentUser(user);
 }
 

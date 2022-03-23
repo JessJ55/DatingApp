@@ -23,6 +23,7 @@ namespace API.Data
                     using var hmac=new HMACSHA512();
                     user.UserName=user.UserName.ToLower();
                     user.PasswordHash=hmac.ComputeHash(Encoding.UTF8.GetBytes("Passw0rd"));
+                    //cuando cree los datos de bd fueron PAssw0rd
                     user.PasswordSalt=hmac.Key;
 
 
