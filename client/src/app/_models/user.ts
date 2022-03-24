@@ -6,4 +6,5 @@ comportan de igual manera que en C# */
 export interface User{
     username: string;
     token: string;
+    photoUrl:string;
 }
