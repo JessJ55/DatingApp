@@ -13,5 +13,7 @@ namespace API.DTOs
         public string PhotoUrl { get; set; }//esta sera su MainPhoto la principal
 
         public string  KnownAs { get; set; }
+
+        public string Gender { get; set; }
     }
 }
