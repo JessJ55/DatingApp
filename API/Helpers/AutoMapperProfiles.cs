@@ -21,6 +21,7 @@ namespace API.Helpers
             //1 destino 2 desde donde mapeamos 3 la fuente desde donde mapeamos
             CreateMap<Photo,PhotoDto>();
             CreateMap<MemberUpdateDto,AppUser>();
+            CreateMap<RegisterDto,AppUser>();
         }
     }
 }
