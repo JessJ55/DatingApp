@@ -48,6 +48,7 @@ export class MemberListComponent implements OnInit {
       this.members = response.result;
       this.pagination = response.pagination;
     })
+    //console.log('El usuario desde memberlist es '+this.memberService.user.username);
   }
 
   resetFilters() {
