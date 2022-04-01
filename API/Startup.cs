@@ -8,6 +8,7 @@ using API.Extensions;
 using API.Interfaces;
 using API.Middleware;
 using API.Services;
+using API.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,6 +48,7 @@ namespace API
             services.AddControllers();
             services.AddCors();
             services.AddIdentityServices(_config);
+            services.AddSignalR();//servicio para mensajes en directo
             // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             // .AddJwtBearer(options =>
             // {
@@ -83,8 +85,11 @@ namespace API
             /*en cors es para resolver el error que nos da por NO permitir los navegadores
             diferentes origenes de rutas por esto debemos usar withorigins con la ruta
             del front-end*/
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins
-            ("https://localhost:4200"));//debe revisar el orden y al activar certificado
+            app.UseCors(x => x.AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()//para permitir a los mensajes enviar datos para hablar en directo
+            .WithOrigins("https://localhost:4200"));
+            //debe revisar el orden y al activar certificado
             //y ser valido la path es https no http
             app.UseAuthentication();
 
@@ -93,6 +98,10 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                //para usar los metodos y enlazar los mensajes en directo necesitamos mapear
+                //los endpoints con el servicio SignalR
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
             });
         }
     }

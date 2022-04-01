@@ -4,6 +4,7 @@ import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
+import { PresenceService } from './presence.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1)//objeto buffer que almacena valores
   //el & por convencion se pone por que va a ser unobservable
   currentUser$ = this.currentUserSource.asObservable();
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient,private presence : PresenceService) { }
 
   login(model: any) {
     //esto es un servicio que devuelve un observable y para ejecutarlo
@@ -28,6 +30,7 @@ export class AccountService {
           // localStorage.setItem('user', JSON.stringify(user));
           // this.currentUserSource.next(user);
           this.setCurrentUser(user);
+          this.presence.createHubConnection(user);
         }
       })
     )
@@ -38,6 +41,7 @@ export class AccountService {
       map((user: User) => {//map para mapear los datos de nuestro usuario
         if (user) {
           this.setCurrentUser(user);
+          this.presence.createHubConnection(user);
           //localStorage.setItem('user', JSON.stringify(user));
           //this.currentUserSource.next(user);
         }
@@ -60,6 +64,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
+    this.presence.stopHubConnection();
   }
 
   getDecodedToken(token){//obtenemos info como jwt.io para sacar info del token

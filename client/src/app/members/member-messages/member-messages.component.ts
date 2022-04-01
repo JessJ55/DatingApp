@@ -17,17 +17,20 @@ export class MemberMessagesComponent implements OnInit {
   messageContent: string;
   //messages: Message[];
 
-  constructor(private messageService: MessageService) { }//private messageService: MessageService
+  constructor(public messageService: MessageService) { }//private messageService: MessageService
+
 
   ngOnInit(): void {
     //this.loadMessages();
   }
 
-  sendMessage(){
-    this.messageService.sendMessage(this.username,this.messageContent).subscribe(message =>
+   sendMessage(){
+    ( this.messageService.sendMessage(this.username, this.messageContent)).then(() =>
       {
-        this.messages.push(message);
+       //console.log(message); message si tiene valor
+        //this.messages.push(message);//llamada a la API
         this.messageForm.reset();
+        //con promesas se usa then en vez de subscribe y no recibimos mensaje de ahi () vacio
       })
   }
 

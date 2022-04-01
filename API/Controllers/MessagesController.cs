@@ -18,13 +18,13 @@ namespace API.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly IMessageRepository _messageRepository;
-        private readonly IMapper _maper;
+        private readonly IMapper _mapper;
 
         public MessagesController(IUserRepository userRepository, IMessageRepository messageRepository,
-        IMapper maper)
+        IMapper mapper)
 
         {
-            _maper = maper;
+            _mapper = mapper;
             _messageRepository = messageRepository;
             _userRepository = userRepository;
         }
@@ -53,7 +53,7 @@ namespace API.Controllers
 
             _messageRepository.AddMessage(message);
 
-            if(await _messageRepository.SaveAllAsync()) return Ok(_maper.Map<MessageDto>(message));
+            if(await _messageRepository.SaveAllAsync()) return Ok(_mapper.Map<MessageDto>(message));
             return BadRequest("Failed to send message");
         }
 
