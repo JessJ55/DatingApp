@@ -76,23 +76,25 @@ namespace API.Data
         }
 
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0; //nos devuelve mas de 0 si algo se ha guardado
-        }
+        // public async Task<bool> SaveAllAsync()//lo hemos quitado de la interfaz
+        // {
+        //     return await _context.SaveChangesAsync() > 0; //nos devuelve mas de 0 si algo se ha guardado
+        // }
 
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
         }
 
-        public Task<IEnumerable<MemberDto>> GetMemberAsync()
+        // public Task<IEnumerable<MemberDto>> GetMemberAsync()
+        // {
+        //     throw new NotImplementedException();
+        // }
+
+        public async Task<string> GetUserGender(string username)
         {
-            throw new NotImplementedException();
+            return await _context.Users.Where(x => x.UserName == username)
+            .Select(x => x.Gender).FirstOrDefaultAsync();
         }
-
-
-
-
     }
 }
