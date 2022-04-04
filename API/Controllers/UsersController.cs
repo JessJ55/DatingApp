@@ -47,7 +47,7 @@ namespace API.Controllers
 
             if (string.IsNullOrEmpty(userParams.Gender))
                 userParams.Gender = gender == "male" ? "female" : "male";
-            
+
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 
@@ -62,7 +62,11 @@ namespace API.Controllers
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
 
-            return await _unitOfWork.UserRepository.GetMemberAsync(username);
+            var currentUsername = User.GetUsername();
+            return await _unitOfWork.UserRepository.GetMemberAsync(username,
+            isCurrentUser: currentUsername == username
+            );
+            //return await _unitOfWork.UserRepository.GetMemberAsync(username);
 
             //return _mapper.Map<MemberDto>(user);
         }
@@ -98,17 +102,18 @@ namespace API.Controllers
                 PublicId = result.PublicId
             };
 
-            if (user.Photos.Count == 0)
-            {
-                photo.IsMain = true;
-            }
+            // if (user.Photos.Count == 0)
+            // {
+            //     photo.IsMain = true;
+            // }
 
             user.Photos.Add(photo);
 
             if (await _unitOfWork.Complete())
             {
                 //return _mapper.Map<PhotoDto>(photo);
-                return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<PhotoDto>(photo));
+                return CreatedAtRoute("GetUser", new { username = user.UserName },
+                _mapper.Map<PhotoDto>(photo));
             }
 
             return BadRequest("Problem adding photo");
@@ -138,9 +143,17 @@ namespace API.Controllers
         public async Task<ActionResult> DeletePhoto(int photoId)
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
-            var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+            //var photoAprove=user.Photos.FirstOrDefault(x => x.IsApproved=false);
+            //user.Photos.Add(photoId);
+            //var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            //para que no falle el obtener foto con la query usamos otro metodo
+            var photo= await _unitOfWork.PhotoRepository.GetPhotoById(photoId);
+            //x => x.Id == photoId en x.id no encuentra el id pasado por parametro
             if (photo == null) return NotFound();
-            if (photo.IsMain) return BadRequest("You can not delete ypu Main photo");
+                
+            
+            if (photo.IsMain) return BadRequest("You can not delete you Main photo");
             if (photo.PublicId != null)
             {
                 var result = await _photoService.DeletePhotoAsync(photo.PublicId);

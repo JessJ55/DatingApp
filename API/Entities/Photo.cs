@@ -12,5 +12,9 @@ namespace API.Entities
         public string PublicId { get; set; }
         public int AppUserId { get; set; }
 
+        //photoChallenge
+        public bool IsApproved { get; set; }
+        public AppUser AppUser { get; set; }
+
     }
 }

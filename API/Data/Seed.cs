@@ -36,6 +36,7 @@ namespace API.Data
                 foreach (var user in users)
                 {
                     //using var hmac=new HMACSHA512();
+                    user.Photos.First().IsApproved = true;//para photoschalenge
                     user.UserName=user.UserName.ToLower();
                     await userManager.CreateAsync(user,"Passw0rd");//se encarga de guardar los cambios el solo
                     // user.PasswordSalt=hmac.Key;

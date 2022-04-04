@@ -1,1 +1,40 @@
-<p>photo-management works!</p>
+<!-- <div class='row'>
+    <div class='col-sm-2' *ngFor='let photo of photos'>
+    <h4>{{photo.username}}</h4>
+    <img src='{{photo.url}}' class='img-thumbnail p-1'
+    alt='{{photo.username}}'>
+    <div class='text-center'>
+    <button class='btn btn-sm btn-success
+    mr-1' (click)='approvePhoto(photo.id)'>Approve</button>
+    <button class='btn btn-sm btndanger'
+    (click)='rejectPhoto(photo.id)'>Reject</button>
+    </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2 img-wrapper" *ngFor="let photo of member.photos">
+    <img src="{{photo.url}}" alt="{{photo.url}}" class="img-thumbnail p-1"
+    [class.not-approved]="!photo.isApproved">
+    <div class="text-center img-text" *ngIf="!photo.isApproved">
+    <span class="text-danger">Awaiting approval</span>
+</div>
+
+<div class="prueba mio">
+    <button
+    [disabled]="photo.isMain || !photo.isApproved"
+    (click)="setMainPhoto(photo)"
+    [ngClass]='photo.isMain ? "btn-success active" : "btn-outlinesuccess"'
+    class="btn btn-sm"
+    >Main</button>
+</div> -->
+<div class='row'>
+    <div class='col-sm-2' *ngFor='let photo of photos'>
+        <h4>{{photo.username}}</h4>
+        <img src='{{photo.url}}' class='img-thumbnail p-1' alt='{{photo.username}}'>
+
+        <div class='text-center'>
+            <button class='btn btn-sm btn-success mr-1' (click)='approvePhoto(photo.id)'>Approve</button>
+            <button class='btn btn-sm btn-danger' (click)='rejectPhoto(photo.id)'>Reject</button>
+        </div>
+    </div>
