@@ -95,6 +95,16 @@ namespace API
 
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            /*
+            El establecimiento de una página predeterminada proporciona a los visitantes un punto 
+            inicial en un sitio. Para servir un archivo predeterminado desde wwwroot sin necesidad 
+            de que la dirección URL de la solicitud incluya el nombre del archivo, llame al método 
+            UseDefaultFiles:
+            Debe llamarse a UseDefaultFiles antes de a UseStaticFiles para proporcionar el archivo predeterminado. 
+            UseDefaultFiles es un sistema de reescritura de direcciones URL que no proporciona el archivo.
+            */
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -102,6 +112,9 @@ namespace API
                 //los endpoints con el servicio SignalR
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");
+                //Para el error de actualizar y no encuentre la ruta de angular usaremos un controlador de reserva
+                //que hacer para cuando no encuentre la ruta
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
