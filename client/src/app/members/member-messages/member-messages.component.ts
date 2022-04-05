@@ -16,6 +16,7 @@ export class MemberMessagesComponent implements OnInit {
   @Input() messages: Message[];
   @Input() username: string;
   messageContent: string;
+  loading =false;
   //messages: Message[];
 
   constructor(public messageService: MessageService) { }//private messageService: MessageService
@@ -26,13 +27,15 @@ export class MemberMessagesComponent implements OnInit {
   }
 
    sendMessage(){
+     this.loading=true;
     ( this.messageService.sendMessage(this.username, this.messageContent)).then(() =>
+    //los ( del this.messa)
       {
        //console.log(message); message si tiene valor
         //this.messages.push(message);//llamada a la API
         this.messageForm.reset();
         //con promesas se usa then en vez de subscribe y no recibimos mensaje de ahi () vacio
-      })
+      }).finally(() => this.loading=false);
   }
 
   // loadMessages(){
