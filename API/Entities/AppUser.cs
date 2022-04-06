@@ -18,6 +18,8 @@ namespace API.Entities
         // public byte[] PasswordSalt { get; set; }
 
         public DateTime DateofBirth { get; set; }
+        //string? es para decirle que puede ser nullable pero solo si pone en api.csproj
+        // <Nullable>enable</Nullable> dentro de propertygroup sino sale error
         public string KnownAs { get; set; }
         public DateTime Create { get; set; } = DateTime.Now;
         public DateTime LastActive { get; set; } = DateTime.Now;

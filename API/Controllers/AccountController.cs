@@ -1,20 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using API.Data;
-using API.Entities;
-using Microsoft.AspNetCore.Mvc;
-using API.DTOs;
-using Microsoft.EntityFrameworkCore;
-using API.Interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Security.Cryptography;
+// using System.Text;
+// using System.Threading.Tasks;
+// using API.Data;
+// using API.Entities;
+// using Microsoft.AspNetCore.Mvc;
+// using API.DTOs;
+// using Microsoft.EntityFrameworkCore;
+// using API.Interfaces;
+// using AutoMapper;
+// using Microsoft.AspNetCore.Identity;
 
-namespace API.Controllers
-{
+//en dotnet 6 podemos quitar los () de los namespaces
+namespace API.Controllers;
+//{
     public class AccountController : BaseApiController
     {
         //private readonly DataContext _context;
@@ -110,4 +111,4 @@ namespace API.Controllers
             return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());//antes _context
         }
     }
-}
+//}
