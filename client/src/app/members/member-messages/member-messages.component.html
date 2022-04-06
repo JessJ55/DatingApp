@@ -14,7 +14,7 @@
         *ngIf="(messageService.messageThread$ | async).length > 0" class="chat">
             <li *ngFor="let message of (messageService.messageThread$ | async)"> 
                 <div>
-                    <span>
+                    <span class="chat-img float-end">
                         <img src="{{message.senderPhotoUrl || './assets/user.png'}}"
                          alt="{{message.senderUsername}}" class="rounded-circle">
                     </span>

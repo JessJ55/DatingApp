@@ -3,14 +3,15 @@
     <h2 class="text-center text-primary">Sign up</h2>
     <hr>
 
-    <div class="form-group">
-        <label style="margin-right: 10px;" class="control-label">I am a:</label>
-        <label  class="radio-inline">
-            <input type="radio" value="male"  formControlName="gender">Male
+    <div class="mb-3">
+        <label style="margin-right: 10px;" >I am a:</label>
+        <!-- class="control-label" -->
+        <label  class="form-control-label">
+            <input class="form-check-input" type="radio" value="male"  formControlName="gender">Male
         </label>
 
-        <label  class="radio-inline">
-            <input type="radio" value="female" class="ml-3"  formControlName="gender">Female
+        <label  class="form-control-label">
+            <input type="radio" value="female" class="form-check-input ms-3"  formControlName="gender">Female
         </label>
     </div>
     
