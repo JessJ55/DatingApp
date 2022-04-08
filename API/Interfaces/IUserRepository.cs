@@ -24,7 +24,8 @@ namespace API.Interfaces
         //Task<IEnumerable<MemberDto>> GetMembersAsync();
         Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);//para la paginacion
 
-        Task<MemberDto> GetMemberAsync(string username,bool isCurrentUser);//el oarametro bool?
+        Task<MemberDto> GetMemberAsync(string username,bool isCurrentUser);
+        //el parametro bool? para photoChallenge
         Task<string> GetUserGender(string username);
     }
 }

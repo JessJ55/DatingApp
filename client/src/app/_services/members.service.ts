@@ -45,7 +45,7 @@ export class MembersService {
   }
 
   setUserParams(params: UserParams) {
-    this.userParams = params
+    this.userParams = params;
   }
 
   resetUserParams() {
@@ -124,7 +124,7 @@ export class MembersService {
         const index = this.members.indexOf(member);
         this.members[index] = member;
       })
-    );
+    )
   }
 
   setMainPhoto(photoId: number) {

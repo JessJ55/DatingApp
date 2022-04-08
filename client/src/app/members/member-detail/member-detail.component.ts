@@ -81,8 +81,6 @@ export class MemberDetailComponent implements OnInit,OnDestroy {
   //   })
   // }
 
-
-
   loadMessages() {
 
     this.messageService.getMessageThread(this.member.username).subscribe(messages => {

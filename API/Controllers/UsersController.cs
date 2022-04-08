@@ -35,7 +35,6 @@ namespace API.Controllers
         }
         // [Authorize(Roles ="Admin")]
         [HttpGet]
-
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
             //hacer consultas en bd es recomendable hacer el codigo asinconrono

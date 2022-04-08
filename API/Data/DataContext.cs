@@ -34,6 +34,11 @@ namespace API.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<Group>() //no lo tenia 
+                .HasMany(x => x.Connections)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<AppUser>()
             .HasMany(ur => ur.UserRoles)
             .WithOne(u => u.User)

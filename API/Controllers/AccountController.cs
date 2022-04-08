@@ -42,16 +42,11 @@ namespace API.Controllers;
             if (await UserExist(registerDto.Username)) return BadRequest("UserName is taken");
 
             var user = _mapper.Map<AppUser>(registerDto);
-
             //using var hmac = new HMACSHA512();//el using es para que lo elimine correctamente
 
             user.UserName=registerDto.Username.ToLower();
             // user.PasswordHash=hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
             // user.PasswordSalt=hmac.Key;
-
-
-
-
             // var user =new AppUser
             // {
             //     UserName=registerDto.Username.ToLower(),

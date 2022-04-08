@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace API.SignalR
 {
+    [Authorize]
     public class PresenceHub : Hub
     {
         private readonly PresenceTracker _tracker;
@@ -16,6 +17,7 @@ namespace API.SignalR
         }
 
         public override async Task OnConnectedAsync(){
+
            var isOnline= await _tracker.UserConnected(Context.User.GetUsername(),Context.ConnectionId);
            if (isOnline)
            {
@@ -31,6 +33,7 @@ namespace API.SignalR
         }
         //para poder conocer quien esta conectado y quien no usaremos u diccionario clave valor
          public override async Task OnDisconnectedAsync(Exception exception){
+             
            var isOffline= await _tracker.UserDisconnected(Context.User.GetUsername(),
            Context.ConnectionId); 
 

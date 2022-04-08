@@ -23,7 +23,7 @@ export class MessageService {
   messageThread$=this.messageThreadSource.asObservable();
 
   constructor(private http: HttpClient,private busyService: BusyService) {
-    this.busyService.busy();
+    //this.busyService.busy();
   }
 
   createHubConnection(user : User,otherUsername: string){
@@ -58,7 +58,7 @@ export class MessageService {
             }
           })
           this.messageThreadSource.next([...messages]);
-        })
+         })
       }
     })
 

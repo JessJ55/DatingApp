@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./server-error.component.css']
 })
 export class ServerErrorComponent implements OnInit {
-  public error:any;  
+   error:any;  //puede que no sea necesario poner lo public
 
   constructor(private router: Router) {
     const navigation= this.router.getCurrentNavigation();

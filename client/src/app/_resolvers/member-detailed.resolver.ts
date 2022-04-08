@@ -17,7 +17,8 @@ export class MemberDetailedResolver implements Resolve<Member>{
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Member | Observable<Member> | Promise<Member> {
        return this.memberService.getMember(route.paramMap.get('username'));
+    // resolve(route: ActivatedRouteSnapshot): Observable<Member> {
+    //     return this.memberService.getMember(route.paramMap.get('username'));//el error message persiste
+    // }
     }
-
-    
 }

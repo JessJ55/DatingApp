@@ -52,10 +52,7 @@ namespace API.SignalR
             var messages = await _unitOfWork.MessageRepository.
             GetMessageThread(Context.User.GetUsername(), otherUser);
 
-            if (_unitOfWork.HasChanges()) 
-            {
-                await _unitOfWork.Complete();//guarda los datos de de BD
-            }
+            if (_unitOfWork.HasChanges()) await _unitOfWork.Complete();//guarda los datos de de BD        
 
             await Clients.Caller.SendAsync("ReceiveMessageThread", messages);
             //Group(groupName) antes
@@ -141,14 +138,14 @@ namespace API.SignalR
         }
 
         private async Task<Group> RemoveFromMessageGroup() //Context.ConnectionId dice  
-        {//(string connectionId)
+        {   //(string connectionId)
             //var connection=await _unitOfWork.MessageRepository.GetConnection(Context.ConnectionId);//connectionId
             var group = await _unitOfWork.MessageRepository.GetGroupForConnection(Context.ConnectionId);
             var connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);
             _unitOfWork.MessageRepository.RemoveConnection(connection);
             if (await _unitOfWork.Complete()) return group;
 
-            throw new HubException("Failed to remove group");
+            throw new HubException("Failed to remove from group");
         }
 
         private string GetGroupName(string caller, string other)

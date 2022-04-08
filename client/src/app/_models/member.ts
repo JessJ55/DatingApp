@@ -9,9 +9,11 @@ export interface Member {
     create: Date
     lastActive: Date
     gender: string
+    //introduction: string; //son los 2 campos que me falta de migrar 
     lookingFor: string
     interests: string
     city: string
+    //country: string;
     photos: Photo[]
   }
   
